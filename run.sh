@@ -18,4 +18,9 @@ for (( i=0; i<10; i++))
     ./list $test_num
 }
 echo ""
+for (( i=0; i<10; i++))
+{
+    ./list2 $test_num
+}
+echo ""
 
