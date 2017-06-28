@@ -66,6 +66,7 @@
  * pointers.
  */
 #include "rbtree_augmented.h"
+#include <stdbool.h>
 #define EXPORT_SYMBOL(a) 
 
 static inline void rb_set_black(struct rb_node *rb)

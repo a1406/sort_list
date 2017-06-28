@@ -88,6 +88,11 @@ static inline void rb_link_node(struct rb_node *node, struct rb_node *parent,
 	*rb_link = node;
 }
 
+static inline void 	rcu_assign_pointer(void *p, void *v)
+{
+	p = v;
+}
+
 static inline void rb_link_node_rcu(struct rb_node *node, struct rb_node *parent,
 				    struct rb_node **rb_link)
 {

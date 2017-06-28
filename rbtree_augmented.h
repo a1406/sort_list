@@ -25,7 +25,7 @@
 #define _LINUX_RBTREE_AUGMENTED_H
 
 #include "rbtree.h"
-
+#define WRITE_ONCE(x, val) x=(val)
 /*
  * Please note - only struct rb_augment_callbacks and the prototypes for
  * rb_insert_augmented() and rb_erase_augmented() are intended to be public.
