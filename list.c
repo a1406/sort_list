@@ -11,6 +11,7 @@ struct buf_entry
 };
 
 static struct buf_entry *head;
+static struct buf_entry all_entry[MAX_TEST_NUM];
 
 void find_entry(uint64_t entry)
 {
@@ -19,23 +20,33 @@ void find_entry(uint64_t entry)
 	{
 		if (t->data == entry)
 			return;
+		t = t->next;
 	}
 	assert(0);
 }
 
 void delete_entry(uint64_t entry)
 {
-//	struct buf_entry *t = pre;
-	
-	/* for (int i = 0; i < num; ++i) */
-	/* { */
-	/* 	if (buf[i] == entry) */
-	/* 	{ */
-	/* 		memmove(&buf[i], &buf[i+1], num - i - 1); */
-	/* 		return; */
-	/* 	} */
-	/* } */
-	/* assert(0); */
+	struct buf_entry *pre = NULL;
+	struct buf_entry *t = head;
+	while (t)
+	{
+		if (t->data == entry)
+		{
+			if (pre)
+			{
+				pre->next = t->next;
+			}
+			else
+			{
+				head = t->next;
+			}
+			return;
+		}
+		pre = t;
+		t = t->next;		
+	}
+	assert(0);
 }
 
 void find(uint64_t *data, int num)
@@ -56,10 +67,12 @@ void delete(uint64_t *data, int num)
 
 void insert(uint64_t *data, int num)
 {
-	/* for (int i = 0; i < num; ++i) */
-	/* { */
-	/* 	buf[i] = data[i]; */
-	/* } */
+	for (int i = 0; i < num; ++i)
+	{
+		all_entry[i].data = data[i];
+		all_entry[i].next = head;
+		head = &all_entry[i];
+	}
 }
 
 int main(int argc, char *argv[])

@@ -13,5 +13,9 @@ for (( i=0; i<10; i++))
     ./sort_array $test_num
 }
 echo ""
-#./list $test_num
+for (( i=0; i<10; i++))
+{
+    ./list $test_num
+}
+echo ""
 
