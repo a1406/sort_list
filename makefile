@@ -1,7 +1,7 @@
-all: array sort_array list list2 radix
+all: array sort_array list list2 radix rb
 
 clean:
-	rm -f array sort_array list list2 radix
+	rm -f array sort_array list list2 radix rb
 
 CFLAGS=-g -O0 -Wno-unused-result
 
@@ -19,3 +19,6 @@ list2: list2.c comm.c
 
 radix: radix.c comm.c radix-tree.c
 	gcc ${CFLAGS} -o radix radix.c comm.c radix-tree.c
+
+rb: rb.c comm.c rbtree.c
+	gcc ${CFLAGS} -o rb rb.c comm.c rbtree.c
