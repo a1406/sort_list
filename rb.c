@@ -5,7 +5,7 @@
 #include "rbtree.h"
 #include "comm.h"
 
-static uint64_t buf[MAX_TEST_NUM];
+//static uint64_t buf[MAX_TEST_NUM];
 
 struct test_node
 {
@@ -13,8 +13,7 @@ struct test_node
 	uint64_t key;
 	struct rb_node rb;	
 };
-
-static struct rb_root root = RB_ROOT;
+static struct test_node test_node[MAX_TEST_NUM];
 
 static void rb_insert__(struct test_node *node, struct rb_root *root)
 {
@@ -54,51 +53,39 @@ static inline struct test_node *rb_find__(uint64_t key, struct rb_root *root)
 	return NULL;
 }
 
-void find_entry(uint64_t entry, int num)
+void find_entry(uint64_t entry, struct rb_root *root)
 {
-	for (int i = 0; i < num; ++i)
-	{
-		if (buf[i] == entry)
-			return;
-	}
-	assert(0);
+	struct test_node *data = rb_find__(entry, root);
+	assert(data && data->key == entry);
 }
 
-void delete_entry(uint64_t entry, int num)
+void delete_entry(uint64_t entry, struct rb_root *root)
 {
-	for (int i = 0; i < num; ++i)
-	{
-		if (buf[i] == entry)
-		{
-			buf[i] = buf[num - 1];
-//			memmove(&buf[i], &buf[i+1], num - i - 1);
-			return;
-		}
-	}
-	assert(0);
+	struct test_node *data = rb_find__(entry, root);
+	rb_erase__(data, root);
 }
 
-void find(uint64_t *data, int num)
+void find(uint64_t *data, int num, struct rb_root *root)
 {
 	for (int i = 0; i < num; ++i)
 	{
-		find_entry(data[i], num);
+		find_entry(data[i], root);
 	}
 }
 
-void delete(uint64_t *data, int num)
+void delete(uint64_t *data, int num, struct rb_root *root)
 {
 	for (int i = 0; i < num; ++i)
 	{
-		delete_entry(data[i], num);
+		delete_entry(data[i], root);
 	}
 }
 
-void insert(uint64_t *data, int num)
+void insert(uint64_t *data, int num, struct rb_root *root)
 {
 	for (int i = 0; i < num; ++i)
 	{
-		buf[i] = data[i];
+		rb_insert__(&test_node[i], root);
 	}
 }
 
@@ -110,10 +97,17 @@ int main(int argc, char *argv[])
 	uint64_t *data_r = read_rand_num(num);
 	assert(data_r);
 
+	struct rb_root root = RB_ROOT;
+	for (int i = 0; i < num; ++i)
+	{
+		test_node[i].index = i;
+		test_node[i].key = data[i];
+	}
+
 	time_begin();
-	insert(data, num);
-	find(data_r, num);
-	delete(data_r, num);
+	insert(data, num, &root);
+	find(data_r, num, &root);
+	delete(data_r, num, &root);
 	int diff = time_diff();
 	printf("[%d] ", diff);
     return 0;
