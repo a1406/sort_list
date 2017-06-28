@@ -1,7 +1,7 @@
-all: array sort_array list list2 radix rb hash
+all: array sort_array list list2 radix rb hash pool
 
 clean:
-	rm -f array sort_array list list2 radix rb hash
+	rm -f array sort_array list list2 radix rb hash pool
 
 CFLAGS=-g -O2 -Wno-unused-result
 
@@ -25,3 +25,7 @@ rb: rb.c comm.c rbtree.c
 
 hash: hash.c comm.c dict.c
 	gcc ${CFLAGS} -o hash hash.c comm.c dict.c
+
+pool: pool.c comm.c mem_pool.c
+	gcc ${CFLAGS} -o pool pool.c comm.c mem_pool.c
+

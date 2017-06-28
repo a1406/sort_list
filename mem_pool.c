@@ -1,8 +1,10 @@
 #include "mem_pool.h"
-#include "game_event.h"
 #include <sys/ipc.h>
 #include <sys/shm.h>
 #include <errno.h>
+
+#define LOG_ERR printf
+#define LOG_DEBUG printf
 
 void *alloc_shared_mem(int resume, unsigned long key, int size)
 {
