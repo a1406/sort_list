@@ -1,7 +1,7 @@
-all: array sort_array list list2 radix rb
+all: array sort_array list list2 radix rb hash
 
 clean:
-	rm -f array sort_array list list2 radix rb
+	rm -f array sort_array list list2 radix rb hash
 
 CFLAGS=-g -O0 -Wno-unused-result
 
@@ -22,3 +22,6 @@ radix: radix.c comm.c radix-tree.c
 
 rb: rb.c comm.c rbtree.c
 	gcc ${CFLAGS} -o rb rb.c comm.c rbtree.c
+
+hash: hash.c comm.c dict.c
+	gcc ${CFLAGS} -o hash hash.c comm.c dict.c
