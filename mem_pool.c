@@ -8,6 +8,9 @@
 
 void *alloc_shared_mem(int resume, unsigned long key, int size)
 {
+
+	return malloc(size);
+	
 //	int size = count_mem_used(player_num);
 	LOG_DEBUG("%s %d: resume[%d], key[%lu], size[%d]", __FUNCTION__, __LINE__, resume, key, size);
 	int shmid;
