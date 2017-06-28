@@ -33,4 +33,4 @@ stlmap: stlmap.cpp comm.c
 	g++ ${CFLAGS} -o stlmap stlmap.cpp comm.c
 
 stlhashmap: stlhashmap.cpp comm.c
-	g++ ${CFLAGS} -o stlhashmap stlhashmap.cpp comm.c 
+	g++ -D_GLIBCXX_PERMIT_BACKWARD_HASH ${CFLAGS} -o stlhashmap stlhashmap.cpp comm.c 

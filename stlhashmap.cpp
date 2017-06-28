@@ -3,7 +3,11 @@
 #include <string.h>
 #include <assert.h>
 #include "comm.h"
-#include <map>
+#include <hash_map>
+
+using namespace std;
+using namespace __gnu_cxx;
+//using namespace stdext;
 
 //static uint64_t buf[MAX_TEST_NUM];
 struct dict_data
@@ -14,19 +18,19 @@ struct dict_data
 
 static struct dict_data dict_data[MAX_TEST_NUM];
 
-void find_entry(std::map<uint64_t, struct dict_data *> *root, uint64_t entry)
+void find_entry(hash_map<uint64_t, struct dict_data *> *root, uint64_t entry)
 {
-	std::map<uint64_t, struct dict_data *>::iterator ite = root->find(entry);
+	hash_map<uint64_t, struct dict_data *>::iterator ite = root->find(entry);
 	assert(ite != root->end());
 	assert((ite)->second->data == entry);
 }
 
-void delete_entry(std::map<uint64_t, struct dict_data *> *root, uint64_t entry)
+void delete_entry(hash_map<uint64_t, struct dict_data *> *root, uint64_t entry)
 {
 	root->erase(entry);
 }
 
-void find(std::map<uint64_t, struct dict_data *> *root, uint64_t *data, int num)
+void find(hash_map<uint64_t, struct dict_data *> *root, uint64_t *data, int num)
 {
 	for (int i = 0; i < num; ++i)
 	{
@@ -34,7 +38,7 @@ void find(std::map<uint64_t, struct dict_data *> *root, uint64_t *data, int num)
 	}
 }
 
-void delete_(std::map<uint64_t, struct dict_data *> *root, uint64_t *data, int num)
+void delete_(hash_map<uint64_t, struct dict_data *> *root, uint64_t *data, int num)
 {
 	for (int i = 0; i < num; ++i)
 	{
@@ -42,7 +46,7 @@ void delete_(std::map<uint64_t, struct dict_data *> *root, uint64_t *data, int n
 	}
 }
 
-void insert(std::map<uint64_t, struct dict_data *> *root, uint64_t *data, int num)
+void insert(hash_map<uint64_t, struct dict_data *> *root, uint64_t *data, int num)
 {
 	for (int i = 0; i < num; ++i)
 	{
@@ -64,7 +68,7 @@ int main(int argc, char *argv[])
 		dict_data[i].index = i;
 		dict_data[i].data = data[i];
 	}
-	std::map<uint64_t, struct dict_data *> root;
+	hash_map<uint64_t, struct dict_data *> root;
 
 	time_begin();
 	insert(&root, data, num);
