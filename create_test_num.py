@@ -6,7 +6,7 @@ import string
 #print sys.argv
 
 nums = set()
-maxnum = 2000000000
+maxnum = 200000000000
 
 n = string.atoi(sys.argv[1])
 for i in range(n):
