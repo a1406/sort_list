@@ -27,18 +27,18 @@ echo "生成数据成功"
 #    ./list2 $test_num
 #}
 #echo ""
-#echo "radix tree"
-#for (( i=0; i<10; i++))
-#{
-#    ./radix $test_num
-#}
-echo ""
-echo "rb tree"
+echo "radix tree"
 for (( i=0; i<10; i++))
 {
-    ./rb $test_num
+    ./radix $test_num
 }
 echo ""
+#echo "rb tree"
+#for (( i=0; i<10; i++))
+#{
+#    ./rb $test_num
+#}
+#echo ""
 echo "hash table"
 for (( i=0; i<10; i++))
 {
