@@ -2,9 +2,36 @@
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
+#include "rbtree.h"
 #include "comm.h"
 
 static uint64_t buf[MAX_TEST_NUM];
+
+struct test_node
+{
+	uint64_t index;
+	uint64_t key;
+	struct rb_node rb;	
+};
+
+static struct rb_root root = RB_ROOT;
+
+static void rb_insert(struct test_node *node, struct rb_root *root)
+{
+	struct rb_node **new = &root->rb_node, *parent = NULL;
+	uint64_t key = node->key;
+
+	while (*new) {
+		parent = *new;
+		if (key < rb_entry(parent, struct test_node, rb)->key)
+			new = &parent->rb_left;
+		else
+			new = &parent->rb_right;
+	}
+
+	rb_link_node(&node->rb, parent, new);
+	rb_insert_color(&node->rb, root);
+}
 
 void find_entry(uint64_t entry, int num)
 {

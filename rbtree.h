@@ -31,7 +31,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <stddef.h>
 
 struct rb_node {
 	unsigned long  __rb_parent_color;
@@ -43,6 +43,10 @@ struct rb_node {
 struct rb_root {
 	struct rb_node *rb_node;
 };
+
+#define container_of(ptr, type, member) ({			\
+	const typeof( ((type *)0)->member ) *__mptr = (ptr);	\
+	(type *)( (char *)__mptr - offsetof(type,member) );})
 
 
 #define rb_parent(r)   ((struct rb_node *)((r)->__rb_parent_color & ~3))
