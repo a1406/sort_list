@@ -62,10 +62,34 @@ void insert(dict *root, uint64_t *data, int num)
 	}
 }
 
+#define GOLDEN_RATIO_64 0x61C8864680B583EBull
 static unsigned int my_hash_func(const void *key)
 {
-	return dictGenHashFunction(key, 8);	
+	return (*(uint64_t *)key) * GOLDEN_RATIO_64 >> (4);
+	
+    uint64_t hash = *(uint64_t *)key;
+
+    /*  Sigh, gcc can't optimise this alone like it does for 32 bits. */
+    uint64_t n = hash;
+    n <<= 18;
+    hash -= n;
+    n <<= 33;
+    hash -= n;
+    n <<= 3;
+    hash += n;
+    n <<= 3;
+    hash -= n;
+    n <<= 4;
+    hash += n;
+    n <<= 2;
+    hash += n;
+
+    /* High bits are more random, so use them. */
+    return hash >> 8;
 }
+	
+//	return dictGenHashFunction(key, 8);	
+//}
 
 static int my_hash_compare(void *privdata, const void *key1, const void *key2)
 {
