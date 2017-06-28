@@ -33,15 +33,21 @@ echo "生成数据成功"
 #    ./radix $test_num
 #}
 #echo ""
-#echo "rb tree"
-#for (( i=0; i<10; i++))
-#{
-#    ./rb $test_num
-#}
-#echo ""
+echo "rb tree"
+for (( i=0; i<10; i++))
+{
+    ./rb $test_num
+}
+echo ""
 echo "hash table"
 for (( i=0; i<10; i++))
 {
     ./hash $test_num
+}
+echo ""
+echo "stl map"
+for (( i=0; i<10; i++))
+{
+    ./stlmap $test_num
 }
 echo ""

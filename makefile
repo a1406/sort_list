@@ -1,7 +1,7 @@
-all: array sort_array list list2 radix rb hash pool stlmap
+all: array sort_array list list2 radix rb hash pool stlmap stlhashmap
 
 clean:
-	rm -f array sort_array list list2 radix rb hash pool stlmap
+	rm -f array sort_array list list2 radix rb hash pool stlmap stlhashmap
 
 CFLAGS=-g -O2 -Wno-unused-result  -Wno-write-strings
 
@@ -30,4 +30,7 @@ pool: pool.c comm.c mem_pool.c
 	gcc ${CFLAGS} -o pool pool.c comm.c mem_pool.c
 
 stlmap: stlmap.cpp comm.c
-	g++ ${CFLAGS} -o stlmap stlmap.cpp comm.c 
+	g++ ${CFLAGS} -o stlmap stlmap.cpp comm.c
+
+stlhashmap: stlhashmap.cpp comm.c
+	g++ ${CFLAGS} -o stlhashmap stlhashmap.cpp comm.c 
