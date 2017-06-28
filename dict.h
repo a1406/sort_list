@@ -111,8 +111,8 @@ typedef struct dictIterator {
 #define dictSize(ht) ((ht)->used)
 
 /* API */
-static unsigned int dictGenHashFunction(const unsigned char *buf, int len);
-static dict *dictCreate(dictType *type, void *privDataPtr);
+unsigned int dictGenHashFunction(const unsigned char *buf, int len);
+dict *dictCreate(dictType *type, void *privDataPtr);
 static int dictExpand(dict *ht, unsigned long size);
 static int dictAdd(dict *ht, void *key, void *val);
 static int dictReplace(dict *ht, void *key, void *val);
