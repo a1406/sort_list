@@ -1,9 +1,9 @@
-all: array sort_array list list2 radix rb hash pool
+all: array sort_array list list2 radix rb hash pool stlmap
 
 clean:
-	rm -f array sort_array list list2 radix rb hash pool
+	rm -f array sort_array list list2 radix rb hash pool stlmap
 
-CFLAGS=-g -O2 -Wno-unused-result
+CFLAGS=-g -O2 -Wno-unused-result  -Wno-write-strings
 
 array: array.c comm.c
 	gcc ${CFLAGS} -o array array.c comm.c
@@ -29,3 +29,5 @@ hash: hash.c comm.c dict.c
 pool: pool.c comm.c mem_pool.c
 	gcc ${CFLAGS} -o pool pool.c comm.c mem_pool.c
 
+stlmap: stlmap.cpp comm.c
+	g++ ${CFLAGS} -o stlmap stlmap.cpp comm.c 
