@@ -67,11 +67,22 @@ static unsigned int my_hash_func(const void *key)
 	return dictGenHashFunction(key, 8);	
 }
 
+static int my_hash_compare(void *privdata, const void *key1, const void *key2)
+{
+	if (*(uint64_t *)key1 == *(uint64_t *)key2)
+		return (1);
+	return (0);
+	/* else if (*(uint64_t *)key1 > *(uint64_t *)key2) */
+	/* 	return 1; */
+	/* else */
+	/* 	return -1; */
+}
+
 static dictType my_dict_type = {
     my_hash_func,            /* hash function */
     NULL,                      /* key dup */
     NULL,                      /* val dup */
-    NULL,      /* key compare */
+    my_hash_compare,      /* key compare */
     NULL, /* key destructor */
     NULL                       /* val destructor */
 };
