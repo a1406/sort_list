@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 
-#define MAX_TEST_NUM (100000)
+#define MAX_TEST_NUM (1000000)
 
 uint64_t *read_test_num(int num);
 uint64_t *read_rand_num(int num);

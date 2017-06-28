@@ -14,33 +14,21 @@ struct radix_data
 
 static struct radix_data radix_data[MAX_TEST_NUM];
 
-void find_entry(struct radix_tree_root *root, uint64_t entry)
+void find_entry(struct radix_tree_head *root, uint64_t entry)
 {
-	/* for (int i = 0; i < num; ++i) */
-	/* { */
-	/* 	if (buf[i] == entry) */
-	/* 		return; */
-	/* } */
 	struct radix_data *data = radix_tree_lookup(root, entry);
-	printf("entry %lu, index = %lu, data %lu\n", entry, data->index, data->data);
-//	assert(0);
+	assert(data && data->data == entry);
+//	printf("find entry %lu, index = %lu, data %lu\n", entry, data->index, data->data);
 }
 
-void delete_entry(struct radix_tree_root *root, uint64_t entry)
+void delete_entry(struct radix_tree_head *root, uint64_t entry)
 {
-/* 	for (int i = 0; i < num; ++i) */
-/* 	{ */
-/* 		if (buf[i] == entry) */
-/* 		{ */
-/* 			buf[i] = buf[num - 1]; */
-/* //			memmove(&buf[i], &buf[i+1], num - i - 1); */
-/* 			return; */
-/* 		} */
-/* 	} */
-//	assert(0);
+	struct radix_data *data = radix_tree_delete(root, entry);
+	assert(data && data->data == entry);	
+//	printf("delete entry %lu, index = %lu, data %lu\n", entry, data->index, data->data);	
 }
 
-void find(struct radix_tree_root *root, uint64_t *data, int num)
+void find(struct radix_tree_head *root, uint64_t *data, int num)
 {
 	for (int i = 0; i < num; ++i)
 	{
@@ -48,7 +36,7 @@ void find(struct radix_tree_root *root, uint64_t *data, int num)
 	}
 }
 
-void delete(struct radix_tree_root *root, uint64_t *data, int num)
+void delete(struct radix_tree_head *root, uint64_t *data, int num)
 {
 	for (int i = 0; i < num; ++i)
 	{
@@ -56,7 +44,7 @@ void delete(struct radix_tree_root *root, uint64_t *data, int num)
 	}
 }
 
-void insert(struct radix_tree_root *root, uint64_t *data, int num)
+void insert(struct radix_tree_head *root, uint64_t *data, int num)
 {
 	for (int i = 0; i < num; ++i)
 	{
@@ -74,22 +62,16 @@ int main(int argc, char *argv[])
 	uint64_t *data_r = read_rand_num(num);
 	assert(data_r);
 
-	radix_tree_init();
-	RADIX_TREE(root);
+//	radix_tree_init();
+//	RADIX_TREE(root);
 
+	struct radix_tree_head root;
+	radix_tree_initial(&root);
 	for (int i = 0; i < num; ++i)
 	{
 		radix_data[i].index = i;
 		radix_data[i].data = data[i];
 	}
-
-//	uint64_t n = 100;
-	radix_tree_insert(&root, 1, 0x300);
-	void *t = radix_tree_lookup(&root, 1);	
-	radix_tree_insert(&root, 1, 0x100);
-	t = radix_tree_lookup(&root, 1);	
-	radix_tree_insert(&root, 1, 0x200);
-	t = radix_tree_lookup(&root, 1);		
 
 	time_begin();
 	insert(&root, data, num);

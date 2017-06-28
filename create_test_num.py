@@ -4,6 +4,15 @@ import string
 
 #print len(sys.argv)
 #print sys.argv
+
+nums = set()
+maxnum = 2000000000
+
 n = string.atoi(sys.argv[1])
 for i in range(n):
-    print random.randint(1,9999999999)
+    n = random.randint(1,maxnum)
+    while n in nums:
+        n = random.randint(1,maxnum)
+    nums.add(n)
+    print n
+
