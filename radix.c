@@ -3,8 +3,10 @@
 #include <string.h>
 #include <assert.h>
 #include "comm.h"
+#include "radix-tree.h"
 
 static uint64_t buf[MAX_TEST_NUM];
+RADIX_TREE(root);
 
 void find_entry(uint64_t entry, int num)
 {
@@ -50,7 +52,9 @@ void insert(uint64_t *data, int num)
 {
 	for (int i = 0; i < num; ++i)
 	{
-		buf[i] = data[i];
+//		buf[i] = data[i];
+		int ret = radix_tree_insert(&root, data[i], &data[i]);
+		assert(ret == 0);
 	}
 }
 

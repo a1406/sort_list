@@ -3,7 +3,7 @@ all: array sort_array list list2 radix
 clean:
 	rm -f array sort_array list list2 radix
 
-CFLAGS=-g -O2 -Wno-unused-result
+CFLAGS=-g -O0 -Wno-unused-result
 
 array: array.c comm.c
 	gcc ${CFLAGS} -o array array.c comm.c
