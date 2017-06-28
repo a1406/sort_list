@@ -29,9 +29,9 @@
 #ifndef	_LINUX_RBTREE_H
 #define	_LINUX_RBTREE_H
 
-#include <linux/kernel.h>
-#include <linux/stddef.h>
-#include <linux/rcupdate.h>
+#include <stdio.h>
+#include <stdlib.h>
+
 
 struct rb_node {
 	unsigned long  __rb_parent_color;

@@ -21,8 +21,6 @@
   linux/lib/rbtree.c
 */
 
-#include <linux/rbtree_augmented.h>
-#include <linux/export.h>
 
 /*
  * red-black trees properties:  http://en.wikipedia.org/wiki/Rbtree
@@ -67,6 +65,8 @@
  * are left undone as of now. Nor did I check for loops involving parent
  * pointers.
  */
+#include "rbtree_augmented.h"
+#define EXPORT_SYMBOL(a) 
 
 static inline void rb_set_black(struct rb_node *rb)
 {
