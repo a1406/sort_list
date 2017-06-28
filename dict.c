@@ -132,7 +132,7 @@ static int dictExpand(dict *ht, unsigned long size) {
 }
 
 /* Add an element to the target hash table */
-static int dictAdd(dict *ht, void *key, void *val) {
+int dictAdd(dict *ht, void *key, void *val) {
     int index;
     dictEntry *entry;
 
@@ -179,7 +179,7 @@ static int dictReplace(dict *ht, void *key, void *val) {
 }
 
 /* Search and remove an element */
-static int dictDelete(dict *ht, const void *key) {
+int dictDelete(dict *ht, const void *key) {
     unsigned int h;
     dictEntry *de, *prevde;
 
@@ -240,7 +240,7 @@ static void dictRelease(dict *ht) {
     free(ht);
 }
 
-static dictEntry *dictFind(dict *ht, const void *key) {
+dictEntry *dictFind(dict *ht, const void *key) {
     dictEntry *he;
     unsigned int h;
 

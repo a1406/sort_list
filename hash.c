@@ -16,6 +16,10 @@ static struct dict_data dict_data[MAX_TEST_NUM];
 
 void find_entry(dict *root, uint64_t entry)
 {
+	dictEntry *ret = dictFind(root, &entry);
+	assert(ret != 0);
+	assert(*(uint64_t *)(ret->key) == entry);
+	assert(((struct dict_data *)(ret->val))->data == entry);
 //	struct radix_data *data = radix_tree_lookup(root, entry);
 //	assert(data && data->data == entry);
 //	printf("find entry %lu, index = %lu, data %lu\n", entry, data->index, data->data);
@@ -23,6 +27,8 @@ void find_entry(dict *root, uint64_t entry)
 
 void delete_entry(dict *root, uint64_t entry)
 {
+	int ret = dictDelete(root, &entry);
+	assert(ret == DICT_OK);
 //	struct radix_data *data = radix_tree_delete(root, entry);
 //	assert(data && data->data == entry);	
 //	printf("delete entry %lu, index = %lu, data %lu\n", entry, data->index, data->data);	
@@ -48,6 +54,8 @@ void insert(dict *root, uint64_t *data, int num)
 {
 	for (int i = 0; i < num; ++i)
 	{
+		int ret = dictAdd(root, &data[i], &dict_data[i]);
+		assert(ret == DICT_OK);
 //		buf[i] = data[i];
 //		int ret = radix_tree_insert(root, data[i], &radix_data[i]);
 //		assert(ret == 0);

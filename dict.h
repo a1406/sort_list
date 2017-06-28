@@ -114,11 +114,11 @@ typedef struct dictIterator {
 unsigned int dictGenHashFunction(const unsigned char *buf, int len);
 dict *dictCreate(dictType *type, void *privDataPtr);
 static int dictExpand(dict *ht, unsigned long size);
-static int dictAdd(dict *ht, void *key, void *val);
+int dictAdd(dict *ht, void *key, void *val);
 static int dictReplace(dict *ht, void *key, void *val);
-static int dictDelete(dict *ht, const void *key);
+int dictDelete(dict *ht, const void *key);
 static void dictRelease(dict *ht);
-static dictEntry * dictFind(dict *ht, const void *key);
+dictEntry * dictFind(dict *ht, const void *key);
 static dictIterator *dictGetIterator(dict *ht);
 static dictEntry *dictNext(dictIterator *iter);
 static void dictReleaseIterator(dictIterator *iter);
