@@ -3,7 +3,8 @@
 
 #include <stdint.h>
 
-#define MAX_TEST_NUM (1000000)
+//最多测试500W的数据
+#define MAX_TEST_NUM (5500000)
 
 uint64_t *read_test_num(int num);
 uint64_t *read_rand_num(int num);

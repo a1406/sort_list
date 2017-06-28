@@ -8,12 +8,12 @@ echo "生成数据成功"
 #{
 #    ./array $test_num
 #}
-echo ""
-echo "排序数组"
-for (( i=0; i<10; i++))
-{
-    ./sort_array $test_num
-}
+#echo ""
+#echo "排序数组"
+#for (( i=0; i<10; i++))
+#{
+#    ./sort_array $test_num
+#}
 #echo ""
 #echo "链表1"
 #for (( i=0; i<10; i++))
@@ -31,5 +31,11 @@ echo "radix tree"
 for (( i=0; i<10; i++))
 {
     ./radix $test_num
+}
+echo ""
+echo "rb tree"
+for (( i=0; i<10; i++))
+{
+    ./rb $test_num
 }
 echo ""
