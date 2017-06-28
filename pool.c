@@ -14,7 +14,7 @@ struct dict_data
 
 void find_entry(struct mass_pool *root, uint64_t entry)
 {
-
+	
 }
 
 void delete_entry(struct mass_pool *root, uint64_t entry)
@@ -41,7 +41,9 @@ void insert(struct mass_pool *root, uint64_t *data, int num)
 {
 	for (int i = 0; i < num; ++i)
 	{
-//		buf[i] = data[i];
+		struct dict_data *ret = mass_pool_alloc(root);
+		ret->index = i;
+		ret->data = data[i];
 	}
 }
 
