@@ -16,10 +16,14 @@ static struct dict_data dict_data[MAX_TEST_NUM];
 
 void find_entry(std::map<uint64_t, struct dict_data *> *root, uint64_t entry)
 {
+	std::map<uint64_t, struct dict_data *>::iterator ite = root->find(entry);
+	assert(ite != root->end());
+	assert((ite)->second->data == entry);
 }
 
 void delete_entry(std::map<uint64_t, struct dict_data *> *root, uint64_t entry)
 {
+	root->erase(entry);
 }
 
 void find(std::map<uint64_t, struct dict_data *> *root, uint64_t *data, int num)
