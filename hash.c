@@ -16,15 +16,15 @@ static struct radix_data radix_data[MAX_TEST_NUM];
 
 void find_entry(struct radix_tree_head *root, uint64_t entry)
 {
-	struct radix_data *data = radix_tree_lookup(root, entry);
-	assert(data && data->data == entry);
+//	struct radix_data *data = radix_tree_lookup(root, entry);
+//	assert(data && data->data == entry);
 //	printf("find entry %lu, index = %lu, data %lu\n", entry, data->index, data->data);
 }
 
 void delete_entry(struct radix_tree_head *root, uint64_t entry)
 {
-	struct radix_data *data = radix_tree_delete(root, entry);
-	assert(data && data->data == entry);	
+//	struct radix_data *data = radix_tree_delete(root, entry);
+//	assert(data && data->data == entry);	
 //	printf("delete entry %lu, index = %lu, data %lu\n", entry, data->index, data->data);	
 }
 
@@ -49,8 +49,8 @@ void insert(struct radix_tree_head *root, uint64_t *data, int num)
 	for (int i = 0; i < num; ++i)
 	{
 //		buf[i] = data[i];
-		int ret = radix_tree_insert(root, data[i], &radix_data[i]);
-		assert(ret == 0);
+//		int ret = radix_tree_insert(root, data[i], &radix_data[i]);
+//		assert(ret == 0);
 	}
 }
 
@@ -66,7 +66,7 @@ int main(int argc, char *argv[])
 //	RADIX_TREE(root);
 
 	struct radix_tree_head root;
-	radix_tree_initial(&root);
+//	radix_tree_initial(&root);
 	for (int i = 0; i < num; ++i)
 	{
 		radix_data[i].index = i;
